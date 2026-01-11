@@ -1,10 +1,31 @@
-salary = 5000  # Ежемесячная зарплата
-spend = 6000  # Траты за первый месяц
-months = 10  # Количество месяцев, которое планируется протянуть без долгов
-increase = 0.03  # Ежемесячный рост цен
-savings = 0
-for i in range(1, 11):    # TODO Рассчитайте подушку безопасности, чтобы протянуть 10 месяцев без долгов
-    savings += salary
-    savings -= spend
-    spend += spend * increase
-print(f"Подушка безопасности, чтобы протянуть {months} месяцев без долгов:", - int(round(savings, 0)))
+
+def find_common_participants(group1, group2, separator=','):
+    """Находит общих участников из двух групп участников.
+
+    Args:
+        group1 (str): Участники первой группы, перечисленные через указанный разделитель.
+        group2 (str): Участники второй группы, перечисленные через указанный разделитель.
+        separator (str): Разделитель, по умолчанию запятая.
+
+    Returns:
+        list: Список общих участников, отсортированный в алфавитном порядке.
+    """
+    # Разделяем строки на участники
+    participants1 = set(group1.split(separator))
+    participants2 = set(group2.split(separator))
+
+    # Находим общие элементы
+    common_participants = participants1.intersection(participants2)
+
+    # Возвращаем отсортированный список общих участников
+    return sorted(common_participants)
+
+
+# Примеры участника из двух групп
+participants_first_group = "Иванов|Петров|Сидоров"
+participants_second_group = "Петров|Сидоров|Смирнов"
+
+# Проверяем работу функции с заданным разделителем
+common_participants = find_common_participants(participants_first_group, participants_second_group, separator='|')
+
+print("Общие участники:", common_participants)
